@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script displays the content of the directory in list format
+for file in *; do
+    if [ -f "$file" ] && [ ! -h "$file" ] && [ "${file:0:1}" != "." ]; then
+        filename=$(basename "$file")
+        part_after_first_dash=${filename#*-}
+        echo "$part_after_first_dash"
+    fi
+done
+
