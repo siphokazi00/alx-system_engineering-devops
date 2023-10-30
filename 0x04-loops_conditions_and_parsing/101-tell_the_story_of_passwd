@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script displays the contents of the passwd file
+
+while IFS=":" read -r username _ _ gid info home shell; do
+    while IFS="," read -ra info_parts; do
+        for part in "${info_parts[@]}"; do
+            if [[ $part == "gecos="* ]]; then
+                gecos=${part#gecos=}
+            fi
+            if [[ $part == "password="* ]]; then
+                password=${part#password=}
+            fi
+        done
+    done <<< "$info"
+
+    echo "The user $username is part of the $gid gang, lives in $home, and rides $shell."
+    echo "USER ID's place is protected by the passcode $password, more info about the user here: $gecos"
+    echo
+done < /etc/passwd
+
