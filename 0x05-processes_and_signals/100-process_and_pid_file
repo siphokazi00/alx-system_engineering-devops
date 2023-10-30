@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# This script creates a file, displays various strings
+
+# Function to remove the PID file and exit
+cleanup() {
+    echo "Cleaning up and exiting..."
+    rm -f /var/run/myscript.pid
+    exit
+}
+
+# Function to display a message on SIGTERM
+sigterm_handler() {
+    echo "I hate the kill command"
+}
+
+# Function to display a message on SIGINT
+sigint_handler() {
+    echo "Y U no love me?!"
+}
+
+# Trap signals and set handlers
+trap sigterm_handler SIGTERM
+trap sigint_handler SIGINT
+trap cleanup SIGQUIT SIGTERM
+
+# Get the current process ID and store it in the PID file
+echo $$ > /var/run/myscript.pid
+
+# Display the main message
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
+

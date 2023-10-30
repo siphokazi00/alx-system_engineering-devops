@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# This script manages manage_my_process
+
+### BEGIN INIT INFO
+# Provides:          manage_my_process
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: manage_my_process
+### END INIT INFO
+
+SCRIPT="/path/to/manage_my_process.sh"
+RUNAS="your_username"
+
+start() {
+    su - "$RUNAS" -c "$SCRIPT start"
+}
+
+stop() {
+    su - "$RUNAS" -c "$SCRIPT stop"
+}
+
+restart() {
+    su - "$RUNAS" -c "$SCRIPT restart"
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit 0
+
