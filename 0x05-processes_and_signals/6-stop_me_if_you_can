@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# This script stops 4-to_infinity_and_beyond process
+
+# Find the PID of the "4-to_infinity_and_beyond" process using pgrep
+pid=$(pgrep "4-to_infinity_and_beyond")
+
+if [ -n "$pid" ]; then
+    # Terminate the process using a custom signal
+    # Replace 'custom_signal' with the actual signal you want to send
+    # Common signals are SIGTERM (15) for graceful termination and SIGKILL (9) for forceful termination
+    # Adjust the signal based on your needs
+    custom_signal="SIGTERM"
+    kill -"$custom_signal" "$pid"
+    echo "4-to_infinity_and_beyond process ($pid) has been stopped gracefully using $custom_signal"
+else
+    echo "4-to_infinity_and_beyond process is not running"
+fi
+
