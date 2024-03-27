@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-
 # Connects to sever using private key ~/.ssh/school
 # and user 'ubuntu'
-
 ssh -i ~/.ssh/school ubuntu@your_srver_ip_here
