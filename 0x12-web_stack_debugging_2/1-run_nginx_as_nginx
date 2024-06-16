@@ -1,25 +1,15 @@
 #!/usr/bin/env bash
 # Configure Nginx to be running as the nginx user
 
-# stop nginx running
-sudo service nginx stop
+# Change Nginx user to nginx
+sudo sed -i 's/user www-data;/user nginx;/g' /etc/nginx/nginx.conf
 
-# Set the user to run Nginx as master process
-sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+# Change listening port to 8080
+sudo sed -i 's/listen 80;/listen 8080;/g' /etc/nginx/sites-available/default
 
-# Configure /etc/nginx/sites-enabled/default to bind Nginx to port 8080
-sudo sed 1 's/80/8080/' /etc/nginx/sites-enabled/default
+# Restart Nginx to apply changes
+sudo service nginx restart
 
-# Give /etc/nginx/nginx.conf the permission 644
-chmod 644 /etc/nginx/ngix.conf
-
-# change ownership of nginx server directory to nginx user
-chown nginx:nginx /etc/nginx/ -R
-
-# check for service running on port 8080
-for pid in $(pidof apache2); do
-	kill "$pid"
-done
-
-# restart nginx
-sudo -u nginx service nginx start
+# Check if Nginx is running as nginx user and listening on port 8080
+pgrep -a nginx
+sudo netstat -tulpn | grep :8080
