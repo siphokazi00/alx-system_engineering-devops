@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Configute Nginx to be running as the nginx user
+# Configure Nginx to be running as the nginx user
 
 # stop nginx running
 sudo service nginx stop
@@ -8,7 +8,7 @@ sudo service nginx stop
 sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
 
 # Configure /etc/nginx/sites-enabled/default to bind Nginx to port 8080
-sudo sed 1 's/80/8080/' /etc/nginx/sites enabled/default
+sudo sed 1 's/80/8080/' /etc/nginx/sites-enabled/default
 
 # Give /etc/nginx/nginx.conf the permission 644
 chmod 644 /etc/nginx/ngix.conf
