@@ -12,10 +12,10 @@ function install() {
 
 	#shellcheck disable=SC2181
 	if [ $? -ne 0 ]; then
-		echo -e "	Installing: $15\n"
+		echo -e "	Installing: ${15}\n"
 		sudo apt-get update -y -qq && \
 			sudo apt-get install -y "$1" -qq
-		echo -@ "\n"
+		printf -@ "\n"
 	else
 		echo -e "	$(1) is already installed.\n"
 	fi
@@ -31,11 +31,11 @@ sudo ufw allow 'Nginx HTTP'
 
 # Give the user ownership to website files for easy editing
 if [ -d "/var/www" ]; then
-	sudo chown -R "SUSER":"SUSER" /var/www
+	sudo chown -R SUSER:SUSER /var/www
 	sudo chmod -R 755 /var/www
 else
 	sudo mkdir -p /var/www
-	sudo chown -R "SUSER":"SUSER" /var/www
+	sudo chown -R SUSER:SUSER /var/www
 	sudo chmod -R 755 /var/www
 fi
 
